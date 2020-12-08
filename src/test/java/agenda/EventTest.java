@@ -30,6 +30,7 @@ public class EventTest {
 
     @Test
     public void eventIsInItsStartDay() {
+        
         assertTrue(simple.isInDay(nov_1_2020), "Un événement a lieu dans son jour de début");
         assertTrue(overlapping.isInDay(nov_1_2020), "Un événement a lieu dans son jour de début");
     }
@@ -47,6 +48,7 @@ public class EventTest {
     }
     @Test
     public void toStringShowsEventTitle() {
+        System.out.println(simple.toString());
         assertTrue(simple.toString().contains("Simple event"), "toString() doit montrer le titre de l'événements");
     }
     

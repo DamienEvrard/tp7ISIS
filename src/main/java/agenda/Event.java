@@ -3,7 +3,6 @@ package agenda;
 import java.time.*;
 
 public class Event {
-
     /**
      * The myTitle of this event
      */
@@ -40,8 +39,7 @@ public class Event {
      * @return true if the event occurs on that day, false otherwise
      */
     public boolean isInDay(LocalDate aDay) {
-        // TODO : implémenter cette méthode
-        throw new UnsupportedOperationException("Pas encore implémenté");
+        return this.myStart.plus(myDuration).toLocalDate().equals(aDay)||this.myStart.toLocalDate().equals(aDay);
     }
    
     /**
@@ -66,6 +64,9 @@ public class Event {
         return myDuration;
     }
 
-   
+    @Override
+    public String toString(){
+        return this.getTitle()+" "+this.getStart()+" "+this.getDuration();
+    }
     
 }

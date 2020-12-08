@@ -45,6 +45,7 @@ public class AgendaTest {
         agenda.addEvent(fixedTermination);
         agenda.addEvent(fixedRepetitions);
         agenda.addEvent(neverEnding);
+        
     }
     
     @Test
