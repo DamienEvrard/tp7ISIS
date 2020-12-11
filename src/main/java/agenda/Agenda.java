@@ -1,6 +1,7 @@
 package agenda;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 
@@ -56,10 +57,14 @@ public class Agenda {
     
     public boolean isFreeFor(Event event){
         for(Event e:listEvent){
-            if((event.getStart().isAfter(e.getStart())&&event.getStart().isBefore(e.getStart().plus(e.getDuration())))||
-               (event.getStart().plus(event.getDuration()).isAfter(e.getStart())&&event.getStart().plus(event.getDuration()).isBefore(e.getStart().plus(e.getDuration())))||
-                event.getStart().isEqual(e.getStart())|| 
-                event.getStart().plus(event.getDuration()).isEqual(e.getStart().plus(e.getDuration()))){
+            LocalDateTime debE = e.getStart();
+            LocalDateTime finE = e.getStart().plus(e.getDuration());
+            LocalDateTime debEvent = event.getStart();
+            LocalDateTime finEvent = event.getStart().plus(event.getDuration());
+            
+            if((debEvent.isAfter(debE)&& debEvent.isBefore(finE))|| 
+               (finEvent.isAfter(debE)&& finEvent.isBefore(finE))||
+                debEvent.isEqual(debE)|| finEvent.isEqual(finE)){
                 return false;
             }
         }
