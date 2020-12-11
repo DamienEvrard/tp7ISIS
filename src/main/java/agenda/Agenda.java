@@ -1,6 +1,7 @@
 package agenda;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 /**
@@ -38,5 +39,32 @@ public class Agenda {
             }
         }
         return liste;
+    }
+    
+    public List<Event> findByTitle(String titre){
+        ArrayList<Event> liste = new ArrayList<>();
+        
+        for(Event e:listEvent){
+            if(e.getTitle().equals(titre)){
+                liste.add(e);
+            }
+        }
+        
+        return liste;
+    }
+    
+    
+    public boolean isFreeFor(Event event){
+        for(Event e:listEvent){
+            if((event.getStart().isAfter(e.getStart())&&event.getStart().isBefore(e.getStart().plus(e.getDuration())))||
+               (event.getStart().plus(event.getDuration()).isAfter(e.getStart())&&event.getStart().plus(event.getDuration()).isBefore(e.getStart().plus(e.getDuration())))||
+                event.getStart().isEqual(e.getStart())|| 
+                event.getStart().plus(event.getDuration()).isEqual(e.getStart().plus(e.getDuration()))){
+                return false;
+            }
+        }
+        
+        
+        return true;
     }
 }
