@@ -91,4 +91,19 @@ public class FixedTerminationEvent extends RepetitiveEvent {
         return this.getTitle()+" "+this.getStart()+" "+this.getDuration()+" "+this.getFrequency()+this.getNumberOfOccurrences()+" "+this.getTerminationDate();
     }
         
+    
+    @Override
+     public boolean isInDay(LocalDate aDay) {
+       if (exception.contains(aDay) || aDay.isAfter(dateFin)) {
+           return false;
+       }
+
+      LocalDate date = this.getStart().toLocalDate();
+
+       while(date.isBefore(aDay) ){
+           date = date.plus(1,getFrequency());
+       }
+
+       return aDay.equals(date);
+    }
 }

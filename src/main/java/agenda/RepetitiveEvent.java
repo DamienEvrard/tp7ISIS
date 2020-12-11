@@ -43,30 +43,17 @@ public class RepetitiveEvent extends Event {
     
     @Override
     public boolean isInDay(LocalDate aDay) {
-        if(exception.contains(aDay)){
-            return false;
-        }
-        switch(this.frequence) {
-            case DAYS:
-                return this.getStart().toLocalDate().isBefore(aDay)|| this.getStart().toLocalDate().equals(aDay);
-            case WEEKS:
-                for(int i =0;i<53;i++){
-                    if(this.getStart().toLocalDate().plus(i, ChronoUnit.WEEKS).equals(aDay)){
-                        return true;
-                    }
-                }
-                return false;
-              
-            case MONTHS:
-                for(int i =0;i<12;i++){
-                    if(this.getStart().toLocalDate().plus(i, ChronoUnit.MONTHS).equals(aDay)){
-                        return true;
-                    }
-                }
-                return false;
-        }
-        
-        return this.getStart().toLocalDate().equals(aDay);
+       if (exception.contains(aDay)){
+           return false;
+       }
+
+      LocalDate date = this.getStart().toLocalDate();
+
+       while(date.isBefore(aDay) ){
+           date = date.plus(1,getFrequency());
+       }
+
+       return aDay.equals(date);
     }
     
 
